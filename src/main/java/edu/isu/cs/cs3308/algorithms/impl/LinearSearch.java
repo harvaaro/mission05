@@ -10,6 +10,8 @@ import edu.isu.cs.cs3308.algorithms.ArraySearch;
 public class LinearSearch implements ArraySearch {
 	/**
 	 * Search through the array using a linear path
+	 * It starts at the beginning of the array and
+	 * searches until it reaches the end
 	 *
 	 * @param array Array to be search for the provided item
 	 * @param item  Item to be found
