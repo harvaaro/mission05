@@ -35,6 +35,21 @@ public class RecursiveLinearSearch implements ArraySearch {
 	 */
 	@Override
 	public <E extends Comparable> int search(E[] array, E item) {
-		return 0;
+		return recSearch(array, item, 0);
+	}
+
+	private <E extends Comparable> int recSearch(E[] array, E item, int index) {
+		if (item != null && array != null && array.length != 0) {
+			if (index >= array.length) {
+				return -1;
+			}
+			else if (array[index] == item) {
+				return index;
+			}
+			else {
+				return recSearch(array, item, index+1);
+			}
+		}
+		return -1;
 	}
 }

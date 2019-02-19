@@ -5,12 +5,7 @@ import edu.isu.cs.cs3308.algorithms.ArraySearch;
 /**
  * Algorithm 1: IterativeLinearSearch(A, t)
  *
- * for i = 0 to n - 1 do
- *    if A[i] = t then
- *        return i
- *    end if
- * end for
- * return -1
+ * @author Aaron Harvey
  */
 public class LinearSearch implements ArraySearch {
 	/**
@@ -29,6 +24,14 @@ public class LinearSearch implements ArraySearch {
 	 */
 	@Override
 	public <E extends Comparable> int search(E[] array, E item) {
-		return 0;
+		if (item != null && array != null && array.length != 0) {
+			int arrSize = array.length;
+			for (int i = 0; i < arrSize; i++) {
+				if (array[i] == item) {
+					return i;
+				}
+			}
+		}
+		return -1;
 	}
 }
