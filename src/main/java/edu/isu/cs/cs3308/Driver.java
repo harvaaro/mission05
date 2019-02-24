@@ -27,11 +27,21 @@ public class Driver {
 	 * Then reports the tally of all the average times for
 	 * each of the algorithms into a csv.
 	 *
+	 * It saves the average values every 1,000th time
+	 * And loops through to get 20 data points
+	 * From the average of 2000 repetitions
+	 * From 20,000 sets of tests.
+	 *
 	 * @param args string of arguments
 	 */
 	public static void main(String args[]) {
-		// do the simulation using generateRandomArray()
+		int saveIndex = 0;
+		int savePoint = 0;
+		int saveRange = 10000;
+		int saveAmount = 20;
+		int setRange = saveRange*saveAmount;
         int numRange = 2000;
+		int reportSize = numRange*saveRange;
         ArraySearch[] searchAlgo = {
                 new LinearSearch()
                 ,new RecursiveLinearSearch()
@@ -41,11 +51,12 @@ public class Driver {
         int numAlgos = searchAlgo.length;
         long[][] timeTaken = new long[numAlgos][];
         for (int i = 0; i < numAlgos; i++) {
-            timeTaken[i] = new long[numRange];
+            timeTaken[i] = new long[saveAmount];
         }
 		long[] avgTime;
+		long[] saveAvgTime = new long[numAlgos];
 
-        for (int set = 0; set < numRange; set++) {
+        for (int set = 0; set < setRange; set++) {
             Integer[] randNumList = generateRandomArray(numRange);
             Random numFind = new Random();
 			avgTime = new long[numAlgos];
@@ -57,13 +68,22 @@ public class Driver {
                 }
             }
 
-            for (int type = 0; type < numAlgos; type++) {
-                timeTaken[type][set] = avgTime[type] / numRange;
-            }
+			for (int type = 0; type < numAlgos; type++) {
+				saveAvgTime[type] += avgTime[type] / numRange;
+			}
+
+            savePoint++;
+            if (savePoint == saveRange) {
+				for (int type = 0; type < numAlgos; type++) {
+					timeTaken[type][saveIndex] = saveAvgTime[type] / saveRange;
+				}
+				saveAvgTime = new long[numAlgos];
+				savePoint = 0;
+				saveIndex++;
+			}
         }
 
-		// report the results using report;
-        report(timeTaken[0],timeTaken[1],timeTaken[2],timeTaken[3],0,1);
+        report(timeTaken[0],timeTaken[1],timeTaken[2],timeTaken[3],reportSize,reportSize);
 	}
 
 	/**
