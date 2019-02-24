@@ -17,9 +17,18 @@ import java.util.Random;
 /**
  * Driver class for the experimental simulator.
  * @author Isaac Griffith
+ * @author Aaron Harvey
  */
 public class Driver {
 
+	/**
+	 * Tests each of the 4 algorithms with a random int array
+	 * Saves the avg time it takes to complete the search
+	 * Then reports the tally of all the average times for
+	 * each of the algorithms into a csv.
+	 *
+	 * @param args string of arguments
+	 */
 	public static void main(String args[]) {
 		// do the simulation using generateRandomArray()
         int numRange = 2000;
@@ -57,6 +66,16 @@ public class Driver {
         report(timeTaken[0],timeTaken[1],timeTaken[2],timeTaken[3],0,1);
 	}
 
+	/**
+	 * Runs the search action on the assigned algorithm, while
+	 * keeping track of how long that search took in nanoseconds
+	 *
+	 * @param searchAlgo The search algorithm to use
+	 * @param avgTime The average time taken so far
+	 * @param randList A random list of integers
+	 * @param numFind Which number to find
+	 * @return The average time taken + the avgtime so far
+	 */
 	private static long timedSearch(ArraySearch searchAlgo, long avgTime, Integer[] randList, int numFind) {
 	    long timeStart = System.nanoTime();
 	    searchAlgo.search(randList,numFind);
