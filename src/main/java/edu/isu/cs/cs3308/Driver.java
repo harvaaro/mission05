@@ -30,15 +30,16 @@ public class Driver {
                 ,new RecursiveBinarySearch()
         };
         int numAlgos = searchAlgo.length;
-        long[] avgTime = new long[numAlgos];
         long[][] timeTaken = new long[numAlgos][];
         for (int i = 0; i < numAlgos; i++) {
             timeTaken[i] = new long[numRange];
         }
+		long[] avgTime;
 
         for (int set = 0; set < numRange; set++) {
             Integer[] randNumList = generateRandomArray(numRange);
             Random numFind = new Random();
+			avgTime = new long[numAlgos];
 
             for (int rep = 0; rep < numRange; rep++) {
                 int searchFor = numFind.nextInt(numRange);
