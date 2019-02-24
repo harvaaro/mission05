@@ -29,15 +29,18 @@ public class Driver {
 	 *
 	 * It saves the average values every 1,000th time
 	 * And loops through to get 20 data points
-	 * From the average of 2000 repetitions
-	 * From 20,000 sets of tests.
+	 * From the average of 20,000 sets of tests
+	 * From the average of 2,000 repetitions
+	 *
+	 * Set average includes the previous set to keep a
+	 * combined average across ever increasing data sets
 	 *
 	 * @param args string of arguments
 	 */
 	public static void main(String args[]) {
 		int saveIndex = 0;
 		int savePoint = 0;
-		int saveRange = 10000;
+		int saveRange = 1000;
 		int saveAmount = 20;
 		int setRange = saveRange*saveAmount;
         int numRange = 2000;
@@ -75,9 +78,8 @@ public class Driver {
             savePoint++;
             if (savePoint == saveRange) {
 				for (int type = 0; type < numAlgos; type++) {
-					timeTaken[type][saveIndex] = saveAvgTime[type] / saveRange;
+					timeTaken[type][saveIndex] = saveAvgTime[type] / (saveRange*(saveIndex+1));
 				}
-				saveAvgTime = new long[numAlgos];
 				savePoint = 0;
 				saveIndex++;
 			}
