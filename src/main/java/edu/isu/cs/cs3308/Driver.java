@@ -27,20 +27,25 @@ public class Driver {
 	 * Then reports the tally of all the average times for
 	 * each of the algorithms into a csv.
 	 *
-	 * It saves the average values every 1,000th time
-	 * And loops through to get 20 data points
-	 * From the average of 20,000 sets of tests
-	 * From the average of 2,000 repetitions
+	 * It saves the average values every (saveRange)th time
+	 * And loops through to get (saveAmount) data points
+	 * From the average of (setRange) sets of tests
+	 * From the average of (numRange) repetitions
 	 *
 	 * Set average includes the previous set to keep a
 	 * combined average across ever increasing data sets
+	 *
+	 * Time to complete with these values is 1 hour on my machine:
+	 * saveRange = 10000
+	 * saveAmount = 20
+	 * numRange = 2000
 	 *
 	 * @param args string of arguments
 	 */
 	public static void main(String args[]) {
 		int saveIndex = 0;
 		int savePoint = 0;
-		int saveRange = 1000;
+		int saveRange = 10000;
 		int saveAmount = 20;
 		int setRange = saveRange*saveAmount;
         int numRange = 2000;
